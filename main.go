@@ -26,14 +26,13 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	log.Infof("[INFO] Stop Android devices on Genymotion Cloud SaaS")
+	log.Infof("Stop Android devices on Genymotion Cloud SaaS")
 	cmd := exec.Command("gmsaas", "instances", "stop", c.GenymotionCloudInstanceUUID)
 	stdout, err := cmd.CombinedOutput()
 	if err != nil {
-		failf("[ERROR] Failed to stop a device, error: %#v | output: %s", err, stdout)
+		failf("Failed to stop a device, error: %#v | output: %s", err, stdout)
 	} else {
-		log.Donef("[INFO] Device stopped %s", c.GenymotionCloudInstanceUUID)
-
+		log.Donef("Device stopped %s", c.GenymotionCloudInstanceUUID)
 	}
 
 	//

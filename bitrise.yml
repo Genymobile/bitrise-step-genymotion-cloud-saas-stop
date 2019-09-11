@@ -6,7 +6,7 @@ app:
   # If you want to share this step into a StepLib
   - BITRISE_STEP_ID: genymotion-cloud-saas-stop
   - BITRISE_STEP_VERSION: "0.0.1"
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop.git
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 
 workflows:
@@ -26,7 +26,7 @@ workflows:
     - path::./:
         title: "Genymotion Cloud SaaS Stop"
         description: |-
-           Stop genymotion Cloud SaaS Android Devices
+           Stop Genymotion Cloud SaaS Instances
         run_if: true
         inputs:
         - genymotion_cloud_saas_instance_uuid: 844eb656-a969-4a2b-95f5-4212eef22b75

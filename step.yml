@@ -13,9 +13,9 @@ summary: |
   Stop Genymotion Cloud SaaS Android devices
 description: |
   Stop Genymotion Cloud SaaS android devices
-website: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop
-source_code_url: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop
-support_url: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop/issues
+website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop/issues
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
@@ -60,7 +60,7 @@ deps:
 
 toolkit:
   go:
-    package_name: github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop
+    package_name: github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
 
 
 inputs:
@@ -69,5 +69,5 @@ inputs:
       title: genymotion_cloud_saas_instance_uuid
       summary: ""
       description: |-
-        Instance UUID of the device you want to stop
+        Instance UUID of the instance you want to stop
       is_required: true
