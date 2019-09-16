@@ -1,26 +1,39 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
+
+	"github.com/bitrise-io/go-utils/log"
+	"github.com/bitrise-tools/go-steputils/stepconf"
 )
 
-func main() {
-	fmt.Println("This is the value specified for the input 'example_step_input':", os.Getenv("example_step_input"))
+// Config ...
+type Config struct {
+	GenymotionCloudInstanceUUID string `env:"genymotion_cloud_saas_instance_uuid,required"`
+}
 
-	//
-	// --- Step Outputs: Export Environment Variables for other Steps:
-	// You can export Environment Variables for other Steps with
-	//  envman, which is automatically installed by `bitrise setup`.
-	// A very simple example:
-	cmdLog, err := exec.Command("bitrise", "envman", "add", "--key", "EXAMPLE_STEP_OUTPUT", "--value", "the value you want to share").CombinedOutput()
-	if err != nil {
-		fmt.Printf("Failed to expose output with envman, error: %#v | output: %s", err, cmdLog)
-		os.Exit(1)
+// failf prints an error and terminates the step.
+func failf(format string, args ...interface{}) {
+	log.Errorf(format, args...)
+	os.Exit(1)
+}
+
+func main() {
+	var c Config
+	if err := stepconf.Parse(&c); err != nil {
+		failf("Issue with input: %s", err)
 	}
-	// You can find more usage examples on envman's GitHub page
-	//  at: https://github.com/bitrise-io/envman
+	stepconf.Print(c)
+
+	log.Infof("Stop Android devices on Genymotion Cloud SaaS")
+	cmd := exec.Command("gmsaas", "instances", "stop", c.GenymotionCloudInstanceUUID)
+	stdout, err := cmd.CombinedOutput()
+	if err != nil {
+		failf("Failed to stop a device, error: %#v | output: %s", err, stdout)
+	} else {
+		log.Donef("Device stopped %s", c.GenymotionCloudInstanceUUID)
+	}
 
 	//
 	// --- Exit codes:

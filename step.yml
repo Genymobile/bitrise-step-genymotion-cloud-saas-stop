@@ -13,9 +13,9 @@ summary: |
   Stop Genymotion Cloud SaaS Android devices
 description: |
   Stop Genymotion Cloud SaaS android devices
-website: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop
-source_code_url: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop
-support_url: https://github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop/issues
+website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop/issues
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
@@ -60,28 +60,14 @@ deps:
 
 toolkit:
   go:
-    package_name: github.com/thomascarpentier/bitrise-step-genymotion-cloud-saas-stop
+    package_name: github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - genymotion_cloud_saas_instance_uuid: ""
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
-      is_expand: true
+      title: genymotion_cloud_saas_instance_uuid
+      summary: ""
+      description: |-
+        Instance UUID of the instance you want to stop
       is_required: true
-      value_options: []
-
-outputs:
-  - EXAMPLE_STEP_OUTPUT:
-    opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
