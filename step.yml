@@ -64,9 +64,9 @@ toolkit:
 
 
 inputs:
-  - genymotion_cloud_saas_instance_uuid: ""
+  - gmcloud_saas_instance_uuid: ""
     opts:
-      title: genymotion_cloud_saas_instance_uuid
+      title: Instance UUID
       summary: ""
       description: |-
         Instance UUID of the instance you want to stop
