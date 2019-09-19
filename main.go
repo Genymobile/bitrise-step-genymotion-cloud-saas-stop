@@ -10,7 +10,7 @@ import (
 
 // Config ...
 type Config struct {
-	GenymotionCloudInstanceUUID string `env:"genymotion_cloud_saas_instance_uuid,required"`
+	GMCloudSaaSInstanceUUID string `env:"gmcloud_saas_instance_uuid,required"`
 }
 
 // failf prints an error and terminates the step.
@@ -27,12 +27,12 @@ func main() {
 	stepconf.Print(c)
 
 	log.Infof("Stop Android devices on Genymotion Cloud SaaS")
-	cmd := exec.Command("gmsaas", "instances", "stop", c.GenymotionCloudInstanceUUID)
+	cmd := exec.Command("gmsaas", "instances", "stop", c.GMCloudSaaSInstanceUUID)
 	stdout, err := cmd.CombinedOutput()
 	if err != nil {
 		failf("Failed to stop a device, error: %#v | output: %s", err, stdout)
 	} else {
-		log.Donef("Device stopped %s", c.GenymotionCloudInstanceUUID)
+		log.Donef("Device stopped %s", c.GMCloudSaaSInstanceUUID)
 	}
 
 	//
