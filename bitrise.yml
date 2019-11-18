@@ -10,7 +10,16 @@ app:
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 
 workflows:
+  ci:
+    steps:
+    - go-list:
+    - golint:
+    - errcheck:
+    - go-test:
+
   test:
+    before_run:
+      - audit-this-step
     steps:
     - change-workdir:
         title: Switch working dir to test / _tmp dir
