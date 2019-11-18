@@ -65,7 +65,7 @@ toolkit:
 
 
 inputs:
-  - gmcloud_saas_instance_uuid: ""
+  - instance_uuid: ""
     opts:
       title: Instance UUID
       summary: ""
