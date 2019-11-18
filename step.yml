@@ -12,7 +12,7 @@ title: |-
 summary: |
   Stop Genymotion Cloud SaaS instances
 description: |
-  Stop Genymotion Cloud SaaS instances
+  Stop Genymotion Cloud SaaS instances.
 website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
 source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
 support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop/issues
@@ -61,5 +61,5 @@ inputs:
       title: Instance UUID
       summary: ""
       description: |-
-        Instance UUID of the instance you want to stop
+        Instance UUID of the instance you want to stop.
       is_required: true
