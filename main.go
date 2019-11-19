@@ -10,7 +10,7 @@ import (
 
 // Config ...
 type Config struct {
-	GMCloudSaaSInstanceUUID string `env:"gmcloud_saas_instance_uuid,required"`
+	GMCloudSaaSInstanceUUID string `env:"instance_uuid,required"`
 }
 
 // failf prints an error and terminates the step.
