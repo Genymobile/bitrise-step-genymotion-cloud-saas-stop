@@ -38,7 +38,7 @@ workflows:
            Stop Genymotion Cloud SaaS Instances
         run_if: true
         inputs:
-        - gmcloud_saas_instance_uuid: 844eb656-a969-4a2b-95f5-4212eef22b75
+        - instance_uuid: $GMCLOUD_SAAS_INSTANCE_UUID
 
   # ----------------------------------------------------------------
   # --- workflows to Share this step into a Step Library
