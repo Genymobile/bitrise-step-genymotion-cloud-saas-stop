@@ -5,12 +5,12 @@ import (
 	"os/exec"
 
 	"github.com/bitrise-io/go-utils/log"
-	"github.com/bitrise-tools/go-steputils/stepconf"
+	"github.com/bitrise-io/go-steputils/stepconf"
 )
 
 // Config ...
 type Config struct {
-	GMCloudSaaSInstanceUUID string `env:"gmcloud_saas_instance_uuid,required"`
+	GMCloudSaaSInstanceUUID string `env:"instance_uuid,required"`
 }
 
 // failf prints an error and terminates the step.

@@ -10,7 +10,16 @@ app:
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 
 workflows:
+  ci:
+    steps:
+    - go-list:
+    - golint:
+    - errcheck:
+    - go-test:
+
   test:
+    before_run:
+      - audit-this-step
     steps:
     - change-workdir:
         title: Switch working dir to test / _tmp dir
@@ -29,7 +38,7 @@ workflows:
            Stop Genymotion Cloud SaaS Instances
         run_if: true
         inputs:
-        - gmcloud_saas_instance_uuid: 844eb656-a969-4a2b-95f5-4212eef22b75
+        - instance_uuid: $GMCLOUD_SAAS_INSTANCE_UUID
 
   # ----------------------------------------------------------------
   # --- workflows to Share this step into a Step Library
@@ -41,6 +50,23 @@ workflows:
             #!/bin/bash
             set -ex
             stepman audit --step-yml ./step.yml
+  
+  # ----------------------------------------------------------------
+  # --- Utility workflows
+  dep-update:
+    title: Dep update
+    description: |
+      Used for updating bitrise dependencies with dep
+    steps:
+    - script:
+        title: Dependency update
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+            go get -u -v github.com/golang/dep/cmd/dep
+            dep ensure -v
+            dep ensure -v -update
 
   share-this-step:
     envs:
