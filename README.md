@@ -4,12 +4,12 @@ Stop Genymotion Cloud SaaS android devices
 
 ## Prerequisite
 
-To use this step, you must have started a Android instance on Genymotion Cloud SaaS with [Start Genymotion Cloud SaaS android devices](https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start.git) step.
+To use this step, you must have started an Android instance on Genymotion Cloud SaaS following [Start Genymotion Cloud SaaS android devices](https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start.git) step.
 
 ## How to setup Bitrise.yml
 
-This step take one input :
-  * `instance_uuid`: instance UUID is the identifier of the Android instance. 
+This step takes one input:
+  * `instance_uuid`: instance UUID is the Android instance identifier. 
 
 Example: 
 `GMCLOUD_SAAS_INSTANCE_UUID` is automatically set as an output of [Start Genymotion Cloud SaaS android devices](https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start.git) step. 
