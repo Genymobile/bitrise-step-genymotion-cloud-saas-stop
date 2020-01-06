@@ -7,7 +7,7 @@ app:
   - BITRISE_STEP_ID: genymotion-cloud-saas-stop
   - BITRISE_STEP_VERSION: "0.0.1"
   - BITRISE_STEP_GIT_CLONE_URL: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop.git
-  - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
+  - MY_STEPLIB_REPO_FORK_GIT_URL: https://github.com/Genymobile/bitrise-steplib
 
 workflows:
   ci:
