@@ -46,7 +46,7 @@ type_tags:
   - utility
 
 is_requires_admin_user: true
-is_always_run: false
+is_always_run: true
 is_skippable: false
 run_if: ""
 
@@ -56,7 +56,7 @@ toolkit:
 
 
 inputs:
-  - instance_uuid: ""
+  - instance_uuid: $GMCLOUD_SAAS_INSTANCE_UUID
     opts:
       title: Instance UUID
       summary: ""
