@@ -61,5 +61,5 @@ inputs:
       title: Instance UUID
       summary: ""
       description: |-
-        Instance UUID of the instance you want to stop.
+        Instance UUIDs list you want to stop.
       is_required: true
