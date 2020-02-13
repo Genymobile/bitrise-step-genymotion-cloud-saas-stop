@@ -11,12 +11,15 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:cc12e8d1756854b6bd1a806e0e62f2e2ce1e275be1f1d67b5e80dc5321db5fba"
+  digest = "1:0c8282cb84562f0119ecabf1841a5a63c4ee815178bc2f1ae678e49b27551a25"
   name = "github.com/bitrise-io/go-utils"
   packages = [
     "colorstring",
+    "command",
+    "errorutil",
     "log",
     "parseutil",
+    "pathutil",
     "pointers",
   ]
   pruneopts = "UT"
@@ -27,6 +30,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/bitrise-io/go-steputils/stepconf",
+    "github.com/bitrise-io/go-utils/command",
     "github.com/bitrise-io/go-utils/log",
   ]
   solver-name = "gps-cdcl"

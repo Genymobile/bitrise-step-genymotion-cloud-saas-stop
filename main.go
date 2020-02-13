@@ -2,10 +2,12 @@ package main
 
 import (
 	"os"
-	"os/exec"
+	"strings"
+	"sync"
 
-	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-steputils/stepconf"
+	"github.com/bitrise-io/go-utils/command"
+	"github.com/bitrise-io/go-utils/log"
 )
 
 // Config ...
@@ -19,6 +21,17 @@ func failf(format string, args ...interface{}) {
 	os.Exit(1)
 }
 
+func stopInstance(wg *sync.WaitGroup, uuid string) {
+	defer wg.Done()
+
+	cmd := command.New("gmsaas", "instances", "stop", uuid)
+	out, err := cmd.RunAndReturnTrimmedCombinedOutput()
+	if err != nil {
+		failf("Failed to stop instance %s, error: error: %s | output: %s", uuid, cmd.PrintableCommandArgs(), err, out)
+	}
+	log.Donef("Instance stopped %s", uuid)
+}
+
 func main() {
 	var c Config
 	if err := stepconf.Parse(&c); err != nil {
@@ -26,14 +39,16 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	log.Infof("Stop Android devices on Genymotion Cloud SaaS")
-	cmd := exec.Command("gmsaas", "instances", "stop", c.GMCloudSaaSInstanceUUID)
-	stdout, err := cmd.CombinedOutput()
-	if err != nil {
-		failf("Failed to stop a device, error: %#v | output: %s", err, stdout)
-	} else {
-		log.Donef("Device stopped %s", c.GMCloudSaaSInstanceUUID)
+	log.Infof("Stopping Genymotion Cloud SaaS instances")
+	instancesList := strings.Split(c.GMCloudSaaSInstanceUUID, ",")
+
+	var wg sync.WaitGroup
+	for cptInstance := 0; cptInstance < len(instancesList); cptInstance++ {
+		wg.Add(1)
+		go stopInstance(&wg, instancesList[cptInstance])
+
 	}
+	wg.Wait()
 
 	//
 	// --- Exit codes:
