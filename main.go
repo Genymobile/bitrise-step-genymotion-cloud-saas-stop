@@ -27,7 +27,7 @@ func stopInstance(wg *sync.WaitGroup, uuid string) {
 	cmd := command.New("gmsaas", "instances", "stop", uuid)
 	out, err := cmd.RunAndReturnTrimmedCombinedOutput()
 	if err != nil {
-		failf("Failed to stop an instance, error: error: %s | output: %s", cmd.PrintableCommandArgs(), err, out)
+		failf("Failed to stop instance %s, error: error: %s | output: %s", uuid, cmd.PrintableCommandArgs(), err, out)
 	}
 	log.Donef("Instance stopped %s", uuid)
 }
@@ -39,7 +39,7 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	log.Infof("Stop Android instances on Genymotion Cloud SaaS")
+	log.Infof("Stopping Genymotion Cloud SaaS instances")
 	instancesList := strings.Split(c.GMCloudSaaSInstanceUUID, ",")
 
 	var wg sync.WaitGroup
