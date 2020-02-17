@@ -15,8 +15,17 @@ type Config struct {
 	GMCloudSaaSInstanceUUID string `env:"instance_uuid,required"`
 }
 
-// failf prints an error and terminates the step.
+// Define variable
+var isError bool = false
+
+// failf prints an error.
 func failf(format string, args ...interface{}) {
+	log.Errorf(format, args...)
+	isError = true
+}
+
+// errorf prints an error and terminates step
+func errorf(format string, args ...interface{}) {
 	log.Errorf(format, args...)
 	os.Exit(1)
 }
@@ -35,7 +44,7 @@ func stopInstance(wg *sync.WaitGroup, uuid string) {
 func main() {
 	var c Config
 	if err := stepconf.Parse(&c); err != nil {
-		failf("Issue with input: %s", err)
+		errorf("Issue with input: %s", err)
 	}
 	stepconf.Print(c)
 
@@ -55,5 +64,9 @@ func main() {
 	// The exit code of your Step is very important. If you return
 	//  with a 0 exit code `bitrise` will register your Step as "successful".
 	// Any non zero exit code will be registered as "failed" by `bitrise`.
+	if isError {
+		// If at least one error happens, step will fail
+		os.Exit(1)
+	}
 	os.Exit(0)
 }
