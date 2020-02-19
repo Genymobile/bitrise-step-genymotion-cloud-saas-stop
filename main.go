@@ -18,16 +18,21 @@ type Config struct {
 // Define variable
 var isError bool = false
 
-// failf prints an error.
-func failf(format string, args ...interface{}) {
+// printError prints an error.
+func printError(format string, args ...interface{}) {
 	log.Errorf(format, args...)
-	isError = true
 }
 
-// errorf prints an error and terminates step
-func errorf(format string, args ...interface{}) {
-	log.Errorf(format, args...)
+// abortf prints an error and terminates step
+func abortf(format string, args ...interface{}) {
+	printError(format, args...)
 	os.Exit(1)
+}
+
+// setOperationFailed marked step as failed
+func setOperationFailed(format string, args ...interface{}) {
+	printError(format, args...)
+	isError = true
 }
 
 func stopInstance(wg *sync.WaitGroup, uuid string) {
@@ -36,7 +41,9 @@ func stopInstance(wg *sync.WaitGroup, uuid string) {
 	cmd := command.New("gmsaas", "instances", "stop", uuid)
 	out, err := cmd.RunAndReturnTrimmedCombinedOutput()
 	if err != nil {
-		failf("Failed to stop instance %s, error: error: %s | output: %s", uuid, cmd.PrintableCommandArgs(), err, out)
+		setOperationFailed("Failed to stop instance %s, error: error: %s | output: %s", uuid, cmd.PrintableCommandArgs(), err, out)
+		return
+
 	}
 	log.Donef("Instance stopped %s", uuid)
 }
@@ -44,7 +51,7 @@ func stopInstance(wg *sync.WaitGroup, uuid string) {
 func main() {
 	var c Config
 	if err := stepconf.Parse(&c); err != nil {
-		errorf("Issue with input: %s", err)
+		abortf("Issue with input: %s", err)
 	}
 	stepconf.Print(c)
 
