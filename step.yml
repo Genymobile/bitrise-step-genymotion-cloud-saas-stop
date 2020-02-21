@@ -62,4 +62,7 @@ inputs:
       summary: ""
       description: |-
         Instance UUIDs list you want to stop.
+
+        This input will include the instances UUIDs of started and connected instances.
+        The UUIDs are separated with a comma, eg: `594d606a-e6f7-43e1-99ac-77e07738a6dc,18e75e62-534e-4407-9700-564d767d6578`
       is_required: true
